@@ -25,7 +25,7 @@ config.rank_ratio = 0.6
 
 config.num_workers = 64
 
-config.rec = "/home/bac.dx/datasets/WebFace_260M/webface12m"
+config.rec = "path to your webface train.rec"
 
 loss = "arc"
 config.output = f'results/{config.network}_0{int(config.rank_ratio * 10)}_{config.grid_size}_{loss}_{config.embedding_size}'

@@ -60,12 +60,10 @@ config.wandb_resume = False # resume wandb run: Only if the you wand t resume th
 
 # For KAN
 config.grid_size = 0
-config.noise_type = None
 
 if config.margin_list == (1.0, 0.5, 0.0):
     loss = "arc"
 elif config.margin_list == (1.0, 0.0, 0.4):
     loss = "cos"
     
-config.output = f'results/{config.network}_{config.grid_size}_{loss}_{config.noise_type}_{config.embedding_size}'
 

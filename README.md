@@ -1,5 +1,5 @@
 # Kolmogorov-Arnold Network Face Recognition (KANFace)
-## Introduction
+## 📝 Introduction
 This project is inspired by using Kolmogorov-Arnold Network (KAN) for face recognition. KANFace integrates KAN's innovative architecture to replace the conventional MLP-based classification heads in traditional face recognition models with adaptive, learnable B-spline activations.
 ###  Kolmogorov-Arnold Networks (KAN)
 KANs represent a fundamentally different approach to neural networks. While traditional networks use fixed activation functions applied at nodes, KANs have learnable activation functions on edges. This dual approach offers:
@@ -17,9 +17,9 @@ Face recognition requires learning discriminative facial features that are robus
 - **Efficiency**: Potentially better parameter efficiency compared to traditional CNNs
 - **Adaptability**: Learnable activation functions can adapt to the specific patterns in facial data
 
-## Authors
+## 👥 Authors
 This repository was made by:
- - Hung Pham |  | [ORCID](https://orcid.org/0009-0004-6317-4996) | [LinkedIn](https://www.linkedin.com/in/hungpham3112/)
+ - Hung Pham | hungpthe170707@fpt.edu.vn | [ORCID](https://orcid.org/0009-0004-6317-4996) | [LinkedIn](https://www.linkedin.com/in/hungpham3112/)
  - Bac Dao | bacdxhe170633@fpt.edu.vn | [ORCID](https://orcid.org/0009-0001-5975-7396)| [LinkedIn](https://www.linkedin.com/in/daobac03/)
  - Ngoc Tran | ngoctphe172221@fpt.edu.vn |[ORCID](https://orcid.org/0009-0000-8470-3843)| [LinkedIn](https://www.linkedin.com/in/phingoc/)
  - Thai Nguyen | thainqhe172794@fpt.edu.vn |[ORCID](https://orcid.org/0009-0007-9340-9081) | [LinkedIn](https://www.linkedin.com/in/thainguyenvi/)
@@ -29,7 +29,7 @@ This repository was made by:
 - The EdgeFace repo is available [here](https://github.com/otroshi/edgeface).
 - The ConvKAN repo is available [here](https://github.com/AntonioTepsich/Convolutional-KANs).
 
-## KANFace Model
+## 🏗️ KANFace Model
 ### Structure
 ![image](./figures/model_structure.png)
 <p align="center"><i>A schematic diagram of the KANFace face recognition model. The diagram is adapted from the EdgeFace architecture to illustrate the modifications made for face recognition. Specifically, the original MLP-based head is replaced with a KANLinear head that leverages learnable B-spline functions for enhanced non-linear approximation and robust embedding generation.</i></p>
@@ -103,7 +103,7 @@ KANFace evaluates on standard face recognition benchmarks:
 - CPLFW (Cross-Pose LFW)
 - CFP-FF (Celebrities in Frontal-Frontal)
 
-## Features
+## ✨ Features
 - Implementation of various KAN architectures for face recognition
 - Support for large-scale face recognition datasets (WebFace with 617,970 identities)
 - Evaluation on multiple face recognition benchmarks (LFW, CFP-FP, AgeDB-30, CALFW, CPLFW)
@@ -168,9 +168,5 @@ python -m torch.distributed.launch --nproc_per_node=8 main.py --config configs/E
 # Evaluate a trained model on benchmarks
 python main.py --config configs/EdgeFaceKAN_mean_06_30_cos_512_webface.py --mode eval
 ```
-## Contributing
+## 🤝 Contributing
 Contributions are welcome! Please feel free to submit issues or pull requests.
-
-
-
-

@@ -34,6 +34,17 @@ This repository was made by:
 ![image](./figures/model_structure.png)
 <p align="center"><i>A schematic diagram of the KANFace face recognition model. The diagram is adapted from the EdgeFace architecture to illustrate the modifications made for face recognition. Specifically, the original MLP-based head is replaced with a KANLinear head that leverages learnable B-spline functions for enhanced non-linear approximation and robust embedding generation.</i></p>
 
+### Benchmarks
+
+KANFace evaluates on standard face recognition benchmarks:
+
+- LFW (Labeled Faces in the Wild)
+- CFP-FP (Celebrities in Frontal-Profile)
+- AgeDB-30
+- CALFW (Cross-Age LFW)
+- CPLFW (Cross-Pose LFW)
+- CFP-FF (Celebrities in Frontal-Frontal)
+
 ### Results
 #### Benchmark Results of KANFace vs. Other FR Models
 | **Model** | **#Params (M)** | **FLOPs (M)** | **LFW (%)** | **CA-LFW (%)** | **CP-LFW (%)** | **CFP-FP (%)** | **CFP-FF (%)** | **AgeDB_30 (%)** | **IJB-B (%)** | **IJB-C (%)** |
@@ -91,17 +102,6 @@ Performance benchmark of KANFace with varying rank ratio, loss functions, and gr
 | 20        | 7.58       | 419.42   | 99.650  | 92.350     | 98.029     | 95.700     | 99.657     | 96.533       | **94.32** | **96.09** |
 | 25        | 8.35       | 441.99   | **99.717**| 92.483   | 97.714     | 95.633     | **99.671** | 96.483       | 94.04     | 95.82     |
 | 30        | 9.13       | 464.56   | 99.683  | 92.283     | 97.814     | 95.583     | **99.671** | 96.400       | 94.27     | 95.92     |
-
-### Benchmarks
-
-KANFace evaluates on standard face recognition benchmarks:
-
-- LFW (Labeled Faces in the Wild)
-- CFP-FP (Celebrities in Frontal-Profile)
-- AgeDB-30
-- CALFW (Cross-Age LFW)
-- CPLFW (Cross-Pose LFW)
-- CFP-FF (Celebrities in Frontal-Frontal)
 
 ## ✨ Features
 - Implementation of various KAN architectures for face recognition

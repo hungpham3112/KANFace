@@ -17,12 +17,6 @@ Face recognition requires learning discriminative facial features that are robus
 - **Efficiency**: Potentially better parameter efficiency compared to traditional CNNs
 - **Adaptability**: Learnable activation functions can adapt to the specific patterns in facial data
 
-## 👥 Authors
-This repository was made by:
- - Hung Pham | hungpthe170707@fpt.edu.vn | [ORCID](https://orcid.org/0009-0004-6317-4996) | [LinkedIn](https://www.linkedin.com/in/hungpham3112/)
- - Bac Dao | bacdxhe170633@fpt.edu.vn | [ORCID](https://orcid.org/0009-0001-5975-7396)| [LinkedIn](https://www.linkedin.com/in/daobac03/)
- - Ngoc Tran | ngoctphe172221@fpt.edu.vn |[ORCID](https://orcid.org/0009-0000-8470-3843)| [LinkedIn](https://www.linkedin.com/in/phingoc/)
- - Thai Nguyen | thainqhe172794@fpt.edu.vn |[ORCID](https://orcid.org/0009-0007-9340-9081) | [LinkedIn](https://www.linkedin.com/in/thainguyenvi/)
 ### Credit
 - The original implementation of KAN is available [here](https://github.com/KindXiaoming/pykan). 
 - The original paper of the KAN is available [here](https://arxiv.org/pdf/2404.19756).
@@ -34,7 +28,7 @@ This repository was made by:
 ![image](./figures/model_structure.png)
 <p align="center"><i>A schematic diagram of the KANFace face recognition model. The diagram is adapted from the EdgeFace architecture to illustrate the modifications made for face recognition. Specifically, the original MLP-based head is replaced with a KANLinear head that leverages learnable B-spline functions for enhanced non-linear approximation and robust embedding generation.</i></p>
 
-### Benchmarks
+### Results
 
 KANFace evaluates on standard face recognition benchmarks:
 
@@ -45,7 +39,6 @@ KANFace evaluates on standard face recognition benchmarks:
 - CPLFW (Cross-Pose LFW)
 - CFP-FF (Celebrities in Frontal-Frontal)
 
-### Results
 #### Benchmark Results of KANFace vs. Other FR Models
 | **Model** | **#Params (M)** | **FLOPs (M)** | **LFW (%)** | **CA-LFW (%)** | **CP-LFW (%)** | **CFP-FP (%)** | **CFP-FF (%)** | **AgeDB_30 (%)** | **IJB-B (%)** | **IJB-C (%)** |
 |-----------|-----------------|---------------|-------------|----------------|----------------|----------------|----------------|------------------|---------------|---------------|
@@ -104,13 +97,13 @@ Performance benchmark of KANFace with varying rank ratio, loss functions, and gr
 | 30        | 9.13       | 464.56   | 99.683  | 92.283     | 97.814     | 95.583     | **99.671** | 96.400       | 94.27     | 95.92     |
 
 ## ✨ Features
-- Implementation of various KAN architectures for face recognition
-- Support for large-scale face recognition datasets (WebFace with 617,970 identities)
-- Evaluation on multiple face recognition benchmarks (LFW, CFP-FP, AgeDB-30, CALFW, CPLFW)
-- Training with cosine/arc-face margin-based softmax losses
-- Multi-GPU distributed training support
-- WandB logging integration for experiment tracking
-- Various configurable hyperparameters (rank ratio, grid size, embedding size)
+- Implementation of various KAN architectures for face recognition.
+- Support for large-scale face recognition datasets (WebFace with 617,970 identities).
+- Evaluation on multiple face recognition benchmarks (LFW, CFP-FP, AgeDB-30, CALFW, CPLFW).
+- Training with cosine/arc-face margin-based softmax losses.
+- Multi-GPU distributed training support.
+- WandB logging integration for experiment tracking.
+- Various configurable hyperparameters (rank ratio, grid size, embedding size).
 
 ## ⚙️ Installation Instructions
 ### Step 1: Clone This Repository
@@ -152,12 +145,12 @@ KANFace/
 #### Configuration
 The project uses configuration files to set hyperparameters. Key parameters include:
 
-- `network`: Base architecture (KANFace)
-- `rank_ratio`: Controls the expressivity of the KAN (0.6 in most configs)
-- `grid_size`: Grid size for the B-spline representation (15, 20, 25, or 30)
-- `embedding_size`: Size of face embeddings (default = 512)
-- `margin_list`: Margin parameters for cosine/arc-face loss
-- `val_targets`: Validation datasets for evaluation
+- `network`: Base architecture (KANFace).
+- `rank_ratio`: Controls the expressivity of the KAN (0.6 in most configs).
+- `grid_size`: Grid size for the B-spline representation (15, 20, 25, or 30).
+- `embedding_size`: Size of face embeddings (default = 512).
+- `margin_list`: Margin parameters for cosine/arc-face loss.
+- `val_targets`: Validation datasets for evaluation.
 
 Example configurations are provided in the `configs/` directory.
 
@@ -193,7 +186,7 @@ print(embedding.shape)
 ```
 
 ### Step 4: Data Preparation
-Download and prepare WebFace12M: place the .rec files in data/webface12m. You can find more instructions [here](https://github.com/deepinsight/insightface/blob/master/recognition/arcface_torch/docs/prepare_webface42m.md)
+Download and prepare WebFace12M: place the .rec files in data/webface12m. You can find more instructions [here](https://github.com/deepinsight/insightface/blob/master/recognition/arcface_torch/docs/prepare_webface42m.md).
 
 ### Step 5: Training
 #### To run with one GPU:

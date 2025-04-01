@@ -5,9 +5,9 @@ from easydict import EasyDict as edict
 # mount -t tmpfs -o size=140G  tmpfs /train_tmp
 
 config = edict()
-config.margin_list = (1.0, 0.0, 0.4)
-config.network = "EdgeFaceKAN_mean"
-config.resume = False 
+config.margin_list = (1.0, 0.5, 0.0)
+config.network = "KANFace"
+config.resume = False
 config.seed = 42
 config.embedding_size = 512
 config.sample_rate = 0.3
@@ -19,21 +19,17 @@ config.lr = 6e-3
 config.verbose = 5000
 config.dali = True
 config.save_all_states = True
-config.grid_size = 15
-config.rank_ratio = 0.6
-# config.dali_aug = True
+config.grid_size = 30
+config.rank_ratio = 0.5
+config.dali_aug = False
 config.num_workers = 64
 
-config.rec = "path to your webface train.rec"
-
-loss = "cos"
+config.rec = "Path to your data/webface12m/train.rec"
+loss = "arc"
 config.output = f'results/{config.network}_0{int(config.rank_ratio * 10)}_{config.grid_size}_{loss}_{config.embedding_size}'
 
 config.num_classes = 617970
 config.num_images = 12720066
-
 config.num_epoch = 50
 config.warmup_epoch = 5
 config.val_targets = ['lfw', 'cfp_fp', "agedb_30", "calfw", "cplfw", "cfp_ff"]
-# config.val_targets = []
-

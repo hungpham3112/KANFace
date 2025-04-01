@@ -1,0 +1,12 @@
+timm
+pandas
+tabulate
+mxnet
+tensorboard
+easydict
+sklearn
+opencv-python
+ptflops
+scipy==1.8.1
+matplotlib
+numpy

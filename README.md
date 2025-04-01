@@ -155,7 +155,7 @@ The project uses configuration files to set hyperparameters. Key parameters incl
 Example configurations are provided in the `configs/` directory.
 
 #### Benchmark
-To see the model parameters, flops, and size on disk, run the following commands (Example for KANFace_mean_06_25_arc_512):
+To see the model parameters, flops, and size on disk, run the following commands (Example for KANFace_06_25_arc_512):
 ```bash
 python ./eval/flops.py --name "KANFace" --rank_ratio 0.6 --num_features 512 --grid_size 25
 ```

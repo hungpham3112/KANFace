@@ -483,7 +483,7 @@ if __name__ == "__main__":
         type=str, 
         choices=["train", "continue", "test"], 
         default="train", 
-        help="Mode to run the script: 'train' or 'test'"
+        help="Mode to run the script: 'train', 'continue', or 'test'"
     )
     args = parser.parse_args()
 

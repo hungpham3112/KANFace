@@ -179,13 +179,10 @@ class KANLinear(nn.Module):
         >>> y, preacts, postacts, postspline = model(x)
         >>> y.shape, preacts.shape, postacts.shape, postspline.shape
         '''
-        # Noise Injection
-        sigma_x = torch.std(x, dim=0, keepdim=True)  # (1, in_dim)
-
         base = self.base_activation(x) # (batch, in_dim)
         y = coef2curve(x_eval=x, grid=self.grid, coef=self.coef, k=self.k)
         y = self.scale_base[None,:,:] * base[:,:,None] + self.scale_sp[None,:,:] * y
-        # print(f"Shape of y before summation: {y.shape}")  # Add this line
+
         if self.neuron_fun == "sum":
             y = torch.sum(y, dim=1)
         elif self.neuron_fun == "mean":

@@ -7,14 +7,14 @@ from ..layers.conv_encoder import ConvEncoder
 from ..layers.LoRaLin import LoRaLin
 from ..layers.KANLinear import KANLinear
 
-class EdgeFaceKAN(nn.Module):
+class KANFace(nn.Module):
     def __init__(self, in_chans=3, num_features=512, rank_ratio = 0.6,
                  depths=[3, 3, 9, 3], dims=[32, 64, 100, 192],
                  global_block=[0, 1, 1, 1], global_block_type=['None', 'SDTA', 'SDTA', 'SDTA'],
                  drop_path_rate=0., layer_scale_init_value=1e-6, head_init_scale=1., expan_ratio=4,
                  kernel_sizes=[3, 5, 7, 9], heads=[4, 4, 4, 4], use_pos_embd_xca=[False, True, False, False],
                  use_pos_embd_global=False, d2_scales=[2, 2, 3, 4], grid_size=5, spline_order=3,
-                 base_activation=nn.SiLU(), neuron_fun=None, noise_type=None):
+                 base_activation=nn.SiLU(), neuron_fun=None):
         super().__init__()
         if rank_ratio == 0.6:
             dims=[32, 64, 100, 192]
@@ -60,7 +60,7 @@ class EdgeFaceKAN(nn.Module):
             self.stages.append(nn.Sequential(*stage_blocks))
             cur += depths[i]
         self.norm = nn.LayerNorm(dims[-1], eps=1e-6)  # Final norm layer
-        print(f"grid_size in EdgeFaceKAN: {grid_size}")
+        print(f"grid_size in KANFace: {grid_size}")
         self.head = KANLinear(dims[-1], num_features,
             num=grid_size,
             k=spline_order,

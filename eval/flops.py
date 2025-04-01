@@ -131,10 +131,10 @@ def layer_parameters(din, dout, shortcut_name="silu", grid=5, k=3):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='')
-    parser.add_argument('--name', type=str, default="r100")
+    parser.add_argument('--name', type=str, default="KANFace")
     parser.add_argument('--rank_ratio', type=float, default=0.6)
     parser.add_argument('--num_features', type=int, default=512)
-    parser.add_argument('--grid_size', type=int, default=5)
+    parser.add_argument('--grid_size', type=int, default=25)
 
 
     args = parser.parse_args()

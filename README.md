@@ -129,7 +129,7 @@ Install [DALI](https://docs.nvidia.com/deeplearning/dali/user-guide/docs/install
 KANFace/
 ├── configs/                # Configuration files for different architectures
 │   ├── base.py             # Base configuration
-│   ├── KANFace_*.py        # Specific configurations for EdgeFaceKAN variants
+│   ├── KANFace_*.py        # Specific configurations for KANFace variants
 ├── eval/                   # Extra evaluation script
 ├── src/            
 │   ├── layers/             # Components to build the model

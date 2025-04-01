@@ -21,7 +21,6 @@ Face recognition requires learning discriminative facial features that are robus
 - The original implementation of KAN is available [here](https://github.com/KindXiaoming/pykan). 
 - The original paper of the KAN is available [here](https://arxiv.org/pdf/2404.19756).
 - The EdgeFace repo is available [here](https://github.com/otroshi/edgeface).
-- The ConvKAN repo is available [here](https://github.com/AntonioTepsich/Convolutional-KANs).
 
 ## 🏗️ KANFace Model
 ### Structure
@@ -97,12 +96,10 @@ Performance benchmark of KANFace with varying rank ratio, loss functions, and gr
 | 30        | 9.13       | 464.56   | 99.683  | 92.283     | 97.814     | 95.583     | **99.671** | 96.400       | 94.27     | 95.92     |
 
 ## ✨ Features
-- Implementation of various KAN architectures for face recognition.
 - Support for large-scale face recognition datasets (WebFace with 617,970 identities).
 - Evaluation on multiple face recognition benchmarks (LFW, CFP-FP, AgeDB-30, CALFW, CPLFW).
 - Training with cosine/arc-face margin-based softmax losses.
 - Multi-GPU distributed training support.
-- WandB logging integration for experiment tracking.
 - Various configurable hyperparameters (rank ratio, grid size, embedding size).
 
 ## ⚙️ Installation Instructions

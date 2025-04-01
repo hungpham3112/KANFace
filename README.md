@@ -111,62 +111,118 @@ Performance benchmark of KANFace with varying rank ratio, loss functions, and gr
 - Multi-GPU distributed training support
 - WandB logging integration for experiment tracking
 - Various configurable hyperparameters (rank ratio, grid size, embedding size)
-### Installation
+
+## ⚙️ Installation Instructions
+### Step 1: Clone This Repository
 ```bash
 # Clone the repository
 git clone https://github.com/hungpham3112/KANFace.git
 cd KANFace
 
 # Create a virtual environment
-conda create -n kanface
+conda create -n kanface python==3.10.16
 conda activate kanface
+```
 
+### Step 2: Install Necessary Components
+```bash
 # Install dependencies
 pip install -r requirements.txt
 ```
+#### Substep: Install PyTorch & DALI
+Install PyTorch to 2.5.1 with CUDA 12.6 (Driver Version: 560.35.03).
+Install [DALI](https://docs.nvidia.com/deeplearning/dali/user-guide/docs/installation.html) as well.
 
-### Project Structure
+### Step 3: Understand Configurations
+#### Project Structure
 ```bash
 KANFace/
 ├── configs/                # Configuration files for different architectures
 │   ├── base.py             # Base configuration
-│   ├── EdgeFaceKAN_*.py    # Specific configurations for EdgeFaceKAN variants
-├── data/                   # Data loading and processing utilities
-├── models/                 # Model definitions
-├── losses/                 # Loss function implementations
+│   ├── KANFace_*.py        # Specific configurations for EdgeFaceKAN variants
+├── eval/                   # Extra evaluation script
+├── src/            
+│   ├── layers/             # Components to build the model
+│   ├── models/             # Model definitions     
 ├── utils/                  # Utility functions
 ├── main.py                 # Main training and evaluation script
 └── requirements.txt        # Dependencies
 ```
 
-### Configuration
+#### Configuration
 The project uses configuration files to set hyperparameters. Key parameters include:
 
-- `network`: Base architecture (EdgeFaceKAN)
+- `network`: Base architecture (KANFace)
 - `rank_ratio`: Controls the expressivity of the KAN (0.6 in most configs)
-- `grid_size`: Grid size for the B-spline representation (15, 20, or 30)
-- `embedding_size`: Size of face embeddings (512)
+- `grid_size`: Grid size for the B-spline representation (15, 20, 25, or 30)
+- `embedding_size`: Size of face embeddings (default = 512)
 - `margin_list`: Margin parameters for cosine/arc-face loss
 - `val_targets`: Validation datasets for evaluation
 
 Example configurations are provided in the `configs/` directory.
 
-### Benchmark
+#### Benchmark
+To see the model parameters, flops, and size on disk, run the following commands (Example for KANFace_mean_06_25_arc_512):
+```bash
+python ./eval/flops.py --name "KANFace" --rank_ratio 0.6 --num_features 512 --grid_size 25
+```
 
-### Usage
-#### Training
+The following code shows how to use the model for inference:
+```bash
+import torch
+import cv2
+from torchvision import transforms
+from .src import get_model
+
+model = get_model('KANFace', num_features = 512, grid_size = 25, rank_ratio = 0.6)
+model.load_state_dict(torch.load("./results/KANFace_06_25_arc_512/model.pt", map_location="cuda"))
+model.eval()
+
+image = cv2.imread("example.jpg")
+image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+
+transform = transforms.Compose([
+    transforms.ToTensor(),  
+    transforms.Resize((112, 112)), 
+])
+
+image_tensor = transform(image)  
+image_tensor = image_tensor.unsqueeze(0).to("cuda")
+embedding = model(image_tensor)
+print(embedding.shape)
+```
+
+### Step 4: Data Preparation
+Download and prepare WebFace12M: place the .rec files in data/webface12m. You can find more instructions [here](https://github.com/deepinsight/insightface/blob/master/recognition/arcface_torch/docs/prepare_webface42m.md)
+
+### Step 5: Training
+#### To run with one GPU:
 ```bash
 # Train with a specific configuration file
-python main.py --config configs/EdgeFaceKAN_mean_06_30_cos_512_webface.py --mode train
-
-# Use multiple GPUs for training
-python -m torch.distributed.launch --nproc_per_node=8 main.py --config configs/EdgeFaceKAN_mean_06_30_cos_512_webface.py --mode train
+python main.py --config configs/KANFace_06_25_arc_512_webface.py --mode "train"
 ```
 
-#### Evaluation
+After this step, if you want to continue the training process:
+```bash
+python main.py --config configs/KANFace_06_25_arc_512_webface_continue.py --mode "continue"
+```
+
+#### To run with mulitple GPUs:
+```bash
+# Use multiple GPUs for training (2 GPUs in this case)
+torchrun --nproc_per_node=2 main.py --config configs/KANFace_06_25_arc_512_webface.py --mode "train"
+```
+After this step, if you want to continue the training process:
+```bash
+torchrun --nproc_per_node=2 main.py --config configs/KANFace_06_25_arc_512_webface_continue.py --mode "continue"
+```
+
+### Step 6: Evaluation
+
 ```bash
 # Evaluate a trained model on benchmarks
-python main.py --config configs/EdgeFaceKAN_mean_06_30_cos_512_webface.py --mode eval
+python main.py --config configs/KANFace_06_25_arc_512_webface.py --mode "test"
 ```
+
 ## 🤝 Contributing
 Contributions are welcome! Please feel free to submit issues or pull requests.

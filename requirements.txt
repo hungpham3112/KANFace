@@ -4,9 +4,9 @@ tabulate
 mxnet
 tensorboard
 easydict
-sklearn
+scikit-learn
 opencv-python
 ptflops
-scipy==1.8.1
+scipy<=1.8.1
 matplotlib
 numpy

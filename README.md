@@ -34,8 +34,8 @@ KANFace evaluates on standard face recognition benchmarks:
 - LFW (Labeled Faces in the Wild)
 - CFP-FP (Celebrities in Frontal-Profile)
 - AgeDB-30
-- CALFW (Cross-Age LFW)
-- CPLFW (Cross-Pose LFW)
+- CA-LFW (Cross-Age LFW)
+- CP-LFW (Cross-Pose LFW)
 - CFP-FF (Celebrities in Frontal-Frontal)
 
 #### Benchmark Results of KANFace vs. Other FR Models
@@ -90,9 +90,9 @@ Performance benchmark of KANFace with varying rank ratio, loss functions, and gr
 
 | Grid size | Params (M) | FLOPs (M) | LFW (%) | CP-LFW (%) | CFP-FP (%) | CA-LFW (%) | CFP-FF (%) | AgeDB_30 (%) | IJB_B (%) | IJB_C (%) |
 |-----------|------------|-----------|---------|------------|------------|------------|------------|--------------|-----------|-----------|
-| 15        | **6.8**    | **396.85**| 99.683  | **92.833** | **98.086** | **95.733** | **99.671** | **96.550**   | 93.81     | 95.66     |
-| 20        | 7.58       | 419.42   | 99.650  | 92.350     | 98.029     | 95.700     | 99.657     | 96.533       | **94.32** | **96.09** |
-| 25        | 8.35       | 441.99   | **99.717**| 92.483   | 97.714     | 95.633     | **99.671** | 96.483       | 94.04     | 95.82     |
+| 15        | **6.8**    | **396.85**| **99.817**  | **92.650** | **98.314** | 95.483 | 99.657 | **96.900**   | 93.69     | 95.54     |
+| 20        | 7.58       | 419.42   | 99.650  | 92.350     | 98.029     | **95.700**     | 99.657     | 96.533       | **94.32** | **96.09** |
+| 25        | 8.35       | 441.99   | 99.717| 92.483   | 97.714     | 95.633     | **99.671** | 96.483       | 94.04     | 95.82     |
 | 30        | 9.13       | 464.56   | 99.683  | 92.283     | 97.814     | 95.583     | **99.671** | 96.400       | 94.27     | 95.92     |
 
 ## ✨ Features
@@ -164,21 +164,28 @@ import cv2
 from torchvision import transforms
 from .src import get_model
 
+# Load the model
 model = get_model('KANFace', num_features = 512, grid_size = 25, rank_ratio = 0.6, neuron_fun="mean")
 model.load_state_dict(torch.load("./results/KANFace_06_25_arc_512/model.pt", map_location="cuda"))
 model.eval()
 
+# Read and preprocess the image using OpenCV
 image = cv2.imread("example.jpg")
 image = cv2.resize(image, (112,112), interpolation=cv2.INTER_LINEAR)
 image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+image = cv2.resize(image, (112, 112))  # Resize with OpenCV
 
+# Define transform: only ToTensor and Normalize
 transform = transforms.Compose([
     transforms.ToTensor(),  
     transforms.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5]), 
 ])
 
-image_tensor = transform(image)  
+# Apply transform
+image_tensor = transform(image)
 image_tensor = image_tensor.unsqueeze(0).to("cuda")
+
+# Get embedding
 embedding = model(image_tensor)
 print(embedding.shape)
 ```

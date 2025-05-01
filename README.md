@@ -57,7 +57,7 @@ KANFace evaluates on standard face recognition benchmarks:
 | EfficientFaceNet | 3.987 | 90 | 99.5 | 94.81 | 88.17 | 94.19 | 99.41 | 95.15 | 89.81 | 92.03 |
 | EdgeFace - S (γ = 0.5) (**Baseline**) | 3.65 | 306.11 | 99.78 | 95.71 | **92.56** | 95.81 | - | 96.93 | **93.58** | **95.63** |
 | EdgeFace - XS (γ = 0.6) (**Baseline**) | 1.77 | 154 | 99.73 | 95.28 | 91.82 | 94.37 | - | 96 | 92.67 | 94.85 |
-| KANFace (($\gamma$) = 0.5) (**Ours**) | 6.8 | 396.85 | **99.683** | **95.733** | **92.833** | **98.086** | **99.671** | **96.550** | **93.81** | **95.66** |
+| KANFace (($\gamma$) = 0.5) (**Ours**) | 6.8 | 396.85 | **99.817** | **95.483** | **92.650** | **98.314** | **99.657** | **96.900** | **93.69** | **95.64** |
 | KANFace (($\gamma$) = 0.6) (**Ours**) | 4.74 | 239.56 | 99.65 | 95.317 | 91.467 | 97.171 | 99.529 | 95.517 | 92.95 | 94.75 |
 
 #### Performance Benchmark of KANFace Model
@@ -173,7 +173,6 @@ model.eval()
 image = cv2.imread("example.jpg")
 image = cv2.resize(image, (112,112), interpolation=cv2.INTER_LINEAR)
 image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-image = cv2.resize(image, (112, 112))  # Resize with OpenCV
 
 # Define transform: only ToTensor and Normalize
 transform = transforms.Compose([

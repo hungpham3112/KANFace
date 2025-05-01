@@ -164,16 +164,17 @@ import cv2
 from torchvision import transforms
 from .src import get_model
 
-model = get_model('KANFace', num_features = 512, grid_size = 25, rank_ratio = 0.6)
+model = get_model('KANFace', num_features = 512, grid_size = 25, rank_ratio = 0.6, neuron_fun="mean")
 model.load_state_dict(torch.load("./results/KANFace_06_25_arc_512/model.pt", map_location="cuda"))
 model.eval()
 
 image = cv2.imread("example.jpg")
+image = cv2.resize(image, (112,112), interpolation=cv2.INTER_LINEAR)
 image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
 transform = transforms.Compose([
     transforms.ToTensor(),  
-    transforms.Resize((112, 112)), 
+    transforms.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5]), 
 ])
 
 image_tensor = transform(image)  
